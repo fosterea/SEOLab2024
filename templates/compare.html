@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Compare Text</title>
+<h1>Compare Text</h1>
+<form action="/" method="POST">
+  Article: <input type=text name='article'><br>
+  Phrase: <input type=text name='phrase'><br>
+  <input type=submit name='Compare'>
+</form>
+{% if similarity_score %}
+  <p>Article: {{article}}</p>
+  <p>Phrase: {{phrase}}</p>
+  <p>The similarity is {{ similarity_score.round(2) }}%</p>
+{% endif %}
