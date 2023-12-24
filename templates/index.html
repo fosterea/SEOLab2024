@@ -1,0 +1,72 @@
+<!doctype html>
+<title>Analyze Website</title>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        word-wrap:break-word;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .url-item {
+        width: 13%;
+    }
+</style>
+
+<h1>Analyze Website</h1>
+<form action="/" method="POST">
+    URL: <input type=text name='url'><br>
+    Phrase: <input type=text name='phrase'><br>
+    <input type=submit name='Analyze'>
+</form>
+
+
+{% if error %}
+<p>Error: {{error}}</p>
+{% endif %}
+
+{% if url %}
+    <p>URL: {{url}}</p>
+    <p>Phrase: {{phrase}}</p>
+    <table>
+        <tr>
+            <th class="url-item">URL</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Title Key phrases</th>
+            <th>Title Key words</th>
+            <th>Description Key phrases</th>
+            <th>Description Key words</th>
+            <th>Similarity</th>
+            <th>Readability</th>
+        </tr>
+
+        {% for key,page in df.iterrows() %}
+            <tr>
+                <td>{{page['URL']}}</td>
+                <td>{{page['Title']}}</td>
+                <td>{{page['Description']}}</td>
+                <td>{{page['Title Phrases']}}</td>
+                <td>{{page['Title Keywords']}}</td>
+                <td>{{page['Description Phrases']}}</td>
+                <td>{{page['Description Keywords']}}</td>
+                <td>{{page['Similarity ratio']}}</td>
+                <td>{{page['Readability']}}</td>   
+            </tr>
+            
+        {% endfor %}
+
+    </table>
+{% endif %}
